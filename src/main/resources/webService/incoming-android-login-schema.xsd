@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<xsd:schema 
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:morganDesign="http://morgan-design.com/ws/schema/2010"
+    targetNamespace="http://morgan-design.com/ws/schema/2010"
+    elementFormDefault="qualified">
+
+	<xsd:element name="LoginRequest">
+		<xsd:complexType>
+			<xsd:all>
+				<xsd:element name="ApplicationUUID" type="morganDesign:guid" minOccurs="1" maxOccurs="1" />
+				<xsd:element name="DeviceID" type="xsd:string" minOccurs="1" maxOccurs="1" />
+				<xsd:element name="UserName" type="xsd:string" minOccurs="1" maxOccurs="1" />
+				<xsd:element name="Password" type="xsd:string" minOccurs="1" maxOccurs="1" />
+			</xsd:all>
+		</xsd:complexType>
+	</xsd:element>
+	
+	<xsd:element name="LoginResponse">
+		<xsd:complexType>
+			<xsd:all>
+				<xsd:element name="AuthenticationID" type="morganDesign:guid" minOccurs="1" maxOccurs="1" />
+				<xsd:element name="ResponseCode" type="xsd:int" minOccurs="1" maxOccurs="1" />
+			</xsd:all>
+		</xsd:complexType>
+	</xsd:element>
+	
+	<xsd:simpleType name="formattedDateTime">
+		<xsd:restriction base="xsd:string">
+			<xsd:pattern value="[0-9]{2}/[0-9]{2}/[0-9]{4} [0-9]{2}:[0-9]{2}:[0-9]{2}" />
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="guid">
+		<xsd:restriction base="xsd:string">
+			<xsd:pattern value="[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+
+</xsd:schema>

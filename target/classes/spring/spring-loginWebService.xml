@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:sws="http://www.springframework.org/schema/web-services"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+	http://www.springframework.org/schema/web-services http://www.springframework.org/schema/web-services/web-services-2.0.xsd
+	http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+	<sws:annotation-driven />
+
+	<!-- http://127.0.0.1:9090/ws/android/login/androidLogin.wsdl -->
+
+	<sws:dynamic-wsdl 
+		id="androidLogin" 
+		portTypeName="Login"
+		locationUri="/ws/android/login/" 
+		targetNamespace="http://morgan-design.com/login/definitions">
+		<sws:xsd location="classpath:/webService/incoming-android-login-schema.xsd" />
+	</sws:dynamic-wsdl>
+	
+	<!-- Spring adapter for JAXB marshaller, maps web requests to JAXB marshallers -->
+	<bean
+		class="org.springframework.ws.server.endpoint.adapter.GenericMarshallingMethodEndpointAdapter">
+		<constructor-arg ref="marshaller" />
+	</bean>
+
+	<!-- JAXB marshaller looking up JAXB classes -->
+	<bean id="marshaller" class="org.springframework.oxm.jaxb.Jaxb2Marshaller">
+		<property name="contextPaths">
+			<list>
+				<value>com.morgan.design.demo.login.ws.generated</value>
+			</list>
+		</property>
+	</bean>
+
+	<!-- Spring-WS validation interceptors -->
+	<sws:interceptors>
+		<bean
+			class="org.springframework.ws.server.endpoint.interceptor.PayloadLoggingInterceptor" />
+		<bean id="validatingInterceptor"
+			class="org.springframework.ws.soap.server.endpoint.interceptor.PayloadValidatingInterceptor">
+			<property name="schema" value="classpath:/webService/incoming-android-login-schema.xsd" />
+			<property name="validateRequest" value="true" />
+			<property name="validateResponse" value="true" />
+		</bean>
+	</sws:interceptors>
+	
+</beans>
