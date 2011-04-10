@@ -24,25 +24,23 @@
 				<checksumPolicy>ignore</checksumPolicy>
 			</releases>
 		</repository>
-		<repository>
-			<id>leadx-nexus</id>
-			<url>http://repo.leadx.com/nexus/content/repositories/thirdparty/</url>
-		</repository>
-		<repository>
-			<id>maven-apache-repo</id>
-			<url>http://people.apache.org/maven-snapshot-repository</url>
-		</repository>
 	</repositories>
-	<dependencies>
 
-		<!-- <dependency> <groupId>mockit</groupId> <artifactId>jmockit</artifactId> 
-			<version>0.999.4</version> <scope>test</scope> </dependency>
-		<dependency>
-			<groupId>jmockit</groupId>
+	<dependencies>
+		<!-- <dependency>
+			<groupId>mockit</groupId>
 			<artifactId>jmockit</artifactId>
-			<version>0.997</version>
+			<version>0.999.8</version>
 			<scope>test</scope>
 		</dependency> -->
+
+		<dependency>
+			<groupId>org.dspace.dependencies.jmockit</groupId>
+			<artifactId>dspace-jmockit</artifactId>
+			<scope>test</scope>
+			<version>0.999.4</version>
+		</dependency>
+
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>

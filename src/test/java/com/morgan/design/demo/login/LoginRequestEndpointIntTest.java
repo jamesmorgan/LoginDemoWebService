@@ -5,6 +5,8 @@ import static org.springframework.ws.test.server.ResponseMatchers.payload;
 
 import javax.xml.transform.Source;
 
+import mockit.Mockit;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

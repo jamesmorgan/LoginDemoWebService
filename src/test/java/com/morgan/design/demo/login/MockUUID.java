@@ -5,6 +5,9 @@ package com.morgan.design.demo.login;
 
 import java.util.UUID;
 
+import mockit.Mock;
+import mockit.MockClass;
+
 /**
  * @author James Edward Morgan
  */
