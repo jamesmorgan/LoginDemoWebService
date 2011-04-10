@@ -2,6 +2,9 @@ package com.morgan.design.demo.login.exception;
 
 import static java.lang.String.format;
 
+/**
+ * @author James Edward Morgan
+ */
 public class LoginRequestInvalidClientIdException extends LoginRequestException {
 
 	/** */

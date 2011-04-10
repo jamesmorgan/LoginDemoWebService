@@ -17,7 +17,7 @@ import com.morgan.design.demo.login.ws.generated.LoginRequest;
 import com.morgan.design.demo.login.ws.generated.LoginResponse;
 
 /**
- * @author james.morgan
+ * @author James Edward Morgan
  */
 @Endpoint
 public class LoginRequestEndpoint {

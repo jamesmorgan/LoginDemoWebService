@@ -5,8 +5,6 @@ import static org.springframework.ws.test.server.ResponseMatchers.payload;
 
 import javax.xml.transform.Source;
 
-import mockit.Mockit;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -18,6 +16,9 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.ws.test.server.MockWebServiceClient;
 import org.springframework.xml.transform.StringSource;
 
+/**
+ * @author James Edward Morgan
+ */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:/spring/spring-loginWebService.xml", "classpath:/spring/spring.xml" })
 public class LoginRequestEndpointIntTest {
