@@ -9,11 +9,11 @@ import mockit.Mock;
 import mockit.MockClass;
 
 /**
- * @author james.morgan
+ * @author James Edward Morgan
+ *
  */
 @MockClass(realClass = UUID.class)
-public final class MockUUID {
-
+public final class MockUUID { 
 	private final String key;
 
 	public MockUUID(final String key) {
