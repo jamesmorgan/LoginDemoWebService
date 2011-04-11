@@ -1,7 +1,9 @@
 package com.morgan.design.demo.login;
 
 import static org.springframework.ws.test.server.RequestCreators.withPayload;
+import static org.springframework.ws.test.server.ResponseMatchers.clientOrSenderFault;
 import static org.springframework.ws.test.server.ResponseMatchers.payload;
+import static org.springframework.ws.test.server.ResponseMatchers.serverOrReceiverFault;
 
 import javax.xml.transform.Source;
 
@@ -18,9 +20,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.ws.test.server.MockWebServiceClient;
 import org.springframework.xml.transform.StringSource;
 
-/**
- * @author James Edward Morgan
- */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:/spring/spring-loginWebService.xml", "classpath:/spring/spring.xml" })
 public class LoginRequestEndpointIntTest {
@@ -51,6 +50,20 @@ public class LoginRequestEndpointIntTest {
 		final Source responsePayload = createReturnPayload();
 		this.mockClient.sendRequest(withPayload(requestPayload))
 			.andExpect(payload(responsePayload));
+	}
+
+	@Test
+	public void shouldRejectInvalidApplicationID() {
+		final Source requestPayload = createLoginPayload("unknown-application-id", CLIENT_ID, "user", "pass");
+		this.mockClient.sendRequest(withPayload(requestPayload))
+			.andExpect(clientOrSenderFault("Validation error"));
+	}
+
+	@Test
+	public void shouldRejectValidApplicationIDButUnknown() {
+		final Source requestPayload = createLoginPayload("be4c3204-28a0-11e0-9f9b-a2436b4d405b", CLIENT_ID, "user", "pass");
+		this.mockClient.sendRequest(withPayload(requestPayload))
+			.andExpect(serverOrReceiverFault("Invalid client ID: be4c3204-28a0-11e0-9f9b-a2436b4d405b"));
 	}
 
 	private Source createReturnPayload() {
